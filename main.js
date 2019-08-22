@@ -1,5 +1,5 @@
 const express = require("express");
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 const app = express();
 const port = 3010;
 
@@ -91,27 +91,44 @@ ${logo.map((char, charIndex) =>
   return svg;
 });
 
-app.get("/", (req, res) => {
-  let data = "";
-  
+app.get("/logo.svg", (req, res) => {
   getLiveLogo().then(logoFromApi => {
     const { logo } = logoFromApi;
-    const svg = `<svg width="152" height="32">
+    const svg = `<svg width="152" height="32" viewBox="0 0 152 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
     ${logo.map((char, charIndex) =>
-    char.map((panel, panelIndex) =>
-    panel.map((pixel, pixelIndex) => {
-        const { x, y } = getCoordinates(pixelIndex);
+      char.map((panel, panelIndex) =>
+        panel.map((pixel, pixelIndex) => {
+          const { x, y } = getCoordinates(pixelIndex);
 
-        return `<rect width="1" height="1" style="fill:${pixel};" x=${cords[
-        charIndex
-        ][panelIndex].x + x} y=${cords[charIndex][panelIndex].y + y} />`;
-    })
-    )
+          return `<rect width="1" height="1" style="fill:${pixel};" x=${cords[
+            charIndex
+          ][panelIndex].x + x} y=${cords[charIndex][panelIndex].y + y} />`;
+        })
+      )
     )}
     </svg>`;
-    data = svg;
+    res.send(svg);
   });
-  res.send(data)
+});
+
+app.get("/:width/:height/logo.svg", (req, res) => {
+  getLiveLogo().then(logoFromApi => {
+    const { logo } = logoFromApi;
+    const svg = `<svg width=${req.params.width} height=${req.params.height} viewBox="0 0 152 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    ${logo.map((char, charIndex) =>
+      char.map((panel, panelIndex) =>
+        panel.map((pixel, pixelIndex) => {
+          const { x, y } = getCoordinates(pixelIndex);
+
+          return `<rect width="1" height="1" style="fill:${pixel};" x=${cords[
+            charIndex
+          ][panelIndex].x + x} y=${cords[charIndex][panelIndex].y + y} />`;
+        })
+      )
+    )}
+    </svg>`;
+    res.send(svg);
+  });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
