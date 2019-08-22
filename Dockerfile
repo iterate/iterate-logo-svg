@@ -13,6 +13,8 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn install --pure-lockfile
 
+COPY main.js .
+
 EXPOSE 3010
 
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
