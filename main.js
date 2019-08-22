@@ -91,6 +91,8 @@ ${logo.map((char, charIndex) =>
   return svg;
 });
 
+app.get("/health", (req, res) => req.send("I'm alive!"));
+
 app.get("/logo.svg", (req, res) => {
   getLiveLogo().then(logoFromApi => {
     const { logo } = logoFromApi;
@@ -114,7 +116,9 @@ app.get("/logo.svg", (req, res) => {
 app.get("/:width/:height/logo.svg", (req, res) => {
   getLiveLogo().then(logoFromApi => {
     const { logo } = logoFromApi;
-    const svg = `<svg width=${req.params.width} height=${req.params.height} viewBox="0 0 152 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    const svg = `<svg width=${req.params.width} height=${
+      req.params.height
+    } viewBox="0 0 152 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
     ${logo.map((char, charIndex) =>
       char.map((panel, panelIndex) =>
         panel.map((pixel, pixelIndex) => {

@@ -1,0 +1,2 @@
+port = 3010
+readiness_path = "/health"
