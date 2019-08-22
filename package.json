@@ -1,0 +1,14 @@
+{
+  "name": "iterate-logo-svg",
+  "version": "1.0.0",
+  "description": "\"App that serves the live logo in SVG\"",
+  "main": "main.js",
+  "repository": "git@github.com:iterate/iterate-logo-svg.git",
+  "author": "Andreas Glasø Skifjeld <andreas.g.skifjeld@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0"
+  }
+}
