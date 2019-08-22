@@ -91,7 +91,7 @@ ${logo.map((char, charIndex) =>
   return svg;
 });
 
-app.get("/health", (req, res) => req.send("I'm alive!"));
+app.get('/health', (req, res) => res.send("I'm alive!"))
 
 app.get("/logo.svg", (req, res) => {
   getLiveLogo().then(logoFromApi => {
