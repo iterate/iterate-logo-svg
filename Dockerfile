@@ -10,9 +10,8 @@ RUN mkdir -p /app/
 WORKDIR /app/
 
 COPY package.json .
-# COPY yarn.lock .
-# RUN yarn install --pure-lockfile
-RUN yarn install
+COPY yarn.lock .
+RUN yarn install --pure-lockfile
 
 EXPOSE 3010
 
